@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import mechanize
 from bs4 import BeautifulSoup
-	
 
 browser=mechanize.Browser()
 browser.set_handle_refresh(False) 
@@ -63,7 +62,7 @@ with open("retskrivningsordbog.txt", 'w') as myfile:
             numbers=soup.find('div',{'id':'buttons'}).find_all('div')
             for div in numbers:
                 if not div.has_attr('align'):
-                    print "%s: %s" %(currentLetter,div.text.strip())
+                    print "%s: %s" %(currentLetter.decode("utf-8"),div.text.strip())
             articles=soup.find('div',{'id':'articles'}).find_all('div')
             ent=[]
             for div in articles:
@@ -78,7 +77,7 @@ with open("retskrivningsordbog.txt", 'w') as myfile:
             browser.submit(name='switchpage', label='>')
    
         except Exception,err:
-            print Exception,err
+            #print Exception,err
             letterIndex+=1
             if not letterIndex>len(letters)-1:
 	            initLetter()
